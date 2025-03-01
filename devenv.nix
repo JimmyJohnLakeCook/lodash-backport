@@ -8,7 +8,15 @@
   packages = [ pkgs.nodejs_23 ];
 
   # https://devenv.sh/languages/
-  languages.javascript.enable = true;
+  languages = {
+    javascript = {
+      enable = true;
+      npm = {
+        enable = true;
+        install.enable = true;
+      };
+    };
+  };
 
   # https://devenv.sh/processes/
   # processes.cargo-watch.exec = "cargo-watch";
@@ -33,10 +41,10 @@
   # };
 
   # https://devenv.sh/tests/
-  # enterTest = ''
-  #   echo "Running tests"
-  #   git --version | grep --color=auto "${pkgs.git.version}"
-  # '';
+  enterTest = ''
+    echo "Running tests"
+    npm test
+  '';
 
   # https://devenv.sh/git-hooks/
   # git-hooks.hooks.shellcheck.enable = true;
